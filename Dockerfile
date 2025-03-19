@@ -1,10 +1,15 @@
-FROM python:3.10-slim-bullseye
-# As of 2023-04-21: Python 3.10.11, Debian 11.0 (Bullseye)
+FROM python:3.13-bookworm
+# As of 2025-03-21: Python 3.13.2, Debian 12.0 (Bookworm)
 
 LABEL org.opencontainers.image.source https://github.com/djaodjin/djaoapp
 
+# Upgrade to Trixie
+RUN apt install ripgrep sd && \
+rg -l "bookworm" /etc/apt/sources.list | xargs sd "bookworm" trixie" \
+apt update && apt upgrade
+
 # Print version info for build log
-RUN echo "Building with" `python --version` '('`which python`')' "on Debian" `cat /etc/debian_version` "(Bullseye Slim)..."
+RUN echo "Building with" `python --version` '('`which python`')' "on Debian" `cat /etc/debian_version` "(Trixie)..."
 
 # ==== Installs required native packages
 RUN set -eux; \
