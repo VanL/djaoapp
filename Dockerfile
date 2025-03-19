@@ -5,7 +5,7 @@ LABEL org.opencontainers.image.source https://github.com/djaodjin/djaoapp
 
 # Upgrade to Trixie
 RUN apt install ripgrep sd && \
-rg -l "bookworm" /etc/apt/sources.list | xargs sd "bookworm" trixie" \
+rg -l "bookworm" /etc/apt/sources.list | xargs sd "bookworm" "trixie" \
 apt update && apt upgrade
 
 # Print version info for build log
